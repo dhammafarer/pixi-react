@@ -6,10 +6,6 @@ import isometricGrid from './lib/isometric-grid.js';
 import * as PIXI from 'pixi.js';
 
 class Graphic extends React.Component {
-  constructor (props) {
-    super(props);
-  }
-
   componentDidMount () {
     let width = this.graphic.offsetWidth;
     let height = this.graphic.offsetHeight;

@@ -58,7 +58,7 @@ function validateStructuresOverlap (errors, {structureTiles}) {
 
 function validateSystemComponents (errors, {system, structureTiles}) {
   let missingTiles = system.components.filter(c => {
-    return structureTiles.map(t => t.data.name).indexOf(c.name) == -1;
+    return structureTiles.map(t => t.data.name).indexOf(c.name) === -1;
   });
   if (missingTiles.length) missingTiles.forEach(c => errors.push(`${c.name} component does not have a tile`));
 }
