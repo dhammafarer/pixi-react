@@ -5,6 +5,7 @@ import * as shapes from './lib/shapes.js';
 import isometricGrid from './lib/isometric-grid.js';
 import { Stage, Graphics, Sprite } from 'react-pixi';
 import { drawShape } from './helpers/pixi-helpers.js';
+import TerrainTiles from './TerrainTiles.js';
 
 class Graphic extends React.Component {
   constructor (props) {
@@ -33,6 +34,7 @@ class Graphic extends React.Component {
       <div className="graphic" ref={c => this.graphic = c}>
         <Stage width={width} height={height} transparent={true}>
           <Graphics ref={c => this.graphics = c}/>
+          <TerrainTiles grid={this.state.grid} terrainTiles={this.props.terrainTiles}/>
           {this.props.structureTiles.map(c =>
             <Sprite key={c.data.name}
               width={this.state.grid.tile.width}
