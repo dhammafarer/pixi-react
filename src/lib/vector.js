@@ -4,6 +4,7 @@ export default function vector (x, y) {
     y,
     toString: () => `(${x},${y})`,
     plus: (v2) => vector(x + v2.x, y + v2.y),
+    minus: (v2) => vector(x - v2.x, y - v2.y),
     greaterThan: v2 => (x > v2.x || y > v2.y),
     equals: v2 => (x === v2.x && y === v2.y),
     surfacePoints: v2 => {

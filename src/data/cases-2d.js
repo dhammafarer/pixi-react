@@ -16,7 +16,6 @@ export const fushan = case2d({
   system: fushanMicrogrid,
   structureTiles: [
     tile({data: {name: 'House'}, position: vector(1, 1), texture: house}),
-    tile({data: {name: 'Diesel Generator'}, position: vector(1, 2), texture: factory}),
-    tile({data: {name: 'PV Solar'}, position: vector(0, 0), texture: factory})
+    tile({data: {name: 'Diesel Generator'}, position: vector(0, 0), texture: factory})
   ]
 });

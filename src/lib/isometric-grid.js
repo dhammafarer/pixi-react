@@ -5,6 +5,7 @@ export default function isometricGrid ({width = 0, height = 0, gridSize = vector
   let {tile, padding} = graphic({width, height, gridSize, ratio, minPadding});
 
   return {
+    tile,
     gridSize,
     tileCoords: vector => {
       return {

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as shapes from './lib/shapes.js';
 import isometricGrid from './lib/isometric-grid.js';
-import { Stage, Graphics } from 'react-pixi';
+import { Stage, Graphics, Sprite } from 'react-pixi';
 import { drawShape } from './helpers/pixi-helpers.js';
 
 class Graphic extends React.Component {
@@ -33,6 +33,14 @@ class Graphic extends React.Component {
       <div className="graphic" ref={c => this.graphic = c}>
         <Stage width={width} height={height} transparent={true}>
           <Graphics ref={c => this.graphics = c}/>
+          {this.props.structureTiles.map(c =>
+            <Sprite key={c.data.name}
+              width={this.state.grid.tile.width}
+              height={this.state.grid.tile.height * c.texture.height}
+              x={this.state.grid.tileCoords(c.position).x}
+              y={this.state.grid.tileCoords(c.position.plus(c.texture.offsetHeight)).y}
+              image={require('./assets/' + c.texture.filename)}/>
+          )}
         </Stage>
       </div>
     );
