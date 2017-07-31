@@ -33,8 +33,8 @@ class Graphic extends React.Component {
     return (
       <div className="graphic" ref={c => this.graphic = c}>
         <Stage width={width} height={height} transparent={true}>
-          <Graphics ref={c => this.graphics = c}/>
           <TerrainTiles grid={this.state.grid} terrainTiles={this.props.terrainTiles}/>
+          <Graphics ref={c => this.graphics = c}/>
           {this.props.structureTiles.map(c =>
             <Sprite key={c.data.name}
               width={this.state.grid.tile.width}
