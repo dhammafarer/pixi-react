@@ -1,6 +1,7 @@
 import graphic from './graphic.js';
+import vector from './vector.js';
 
-export default function isometricGrid ({width, height, gridSize, ratio = 1.732, minPadding = 1}) {
+export default function isometricGrid ({width = 0, height = 0, gridSize = vector(0,0), ratio = 1.732, minPadding = 1}) {
   let {tile, padding} = graphic({width, height, gridSize, ratio, minPadding});
 
   return {

@@ -18,7 +18,9 @@ export default function  validateCase (options) {
 
 // handleErrors :: (Object, Array) -> Array
 function handleErrors (options, errors) {
-  if (errors.length) throw `Validation Error: ${options.name} contains errors:\n ${errors.join('\n')}`;
+  if (errors.length) {
+    throw new Error(`Validation Error: ${options.name} contains errors:\n ${errors.join('\n')}`);
+  }
   return errors;
 }
 

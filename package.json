@@ -7,6 +7,7 @@
     "ramda": "^0.24.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-pixi": "^0.9.12",
     "react-scripts": "1.0.10"
   },
   "scripts": {
