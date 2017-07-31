@@ -1,4 +1,6 @@
 import tile from './tile.js';
+import compose from 'ramda/src/compose';
+import tap from 'ramda/src/tap';
 import vector from './vector.js';
 
 // case2d :: Object -> Object
@@ -15,31 +17,46 @@ export const case2d = (options) => {
 };
 
 function  validateCase (options) {
-  let errors = [];
-  validateTerrainSize(errors, options);
-  validateStructuresPlacement(errors, options);
-  validateStructuresOverlap(errors, options);
-  validateSystemComponents(errors, options);
+  return compose(
+    handleErrors,
+    validateStructuresOverlap,
+    validateStructuresPlacement,
+    validateSystemComponents,
+    validateTerrainSize
+  )([[], options]);
+}
+
+function handleErrors ([errors, options]) {
   if (errors.length) throw `Validation Error: ${options.name} contains errors:\n ${errors.join('\n')}`;
 }
 
-// validateTerrainMapSize :: (Object, Array) -> undefined
-function validateTerrainSize (errors, {terrainTiles, gridSize}) {
+// validateTerrainMapSize :: Array -> Array
+function validateTerrainSize ([_errors, options]) {
+  let {terrainTiles, gridSize} = options;
+  let errors = _errors;
   if (terrainTiles.some(tile => tile.position.greaterThan(gridSize))) {
     errors.push('terrain map is larger than grid');
   }
+  return [errors, options];
 }
 
-function validateStructuresPlacement (errors, {terrainTiles, structureTiles}) {
+function validateStructuresPlacement ([_errors, options]) {
+  let {terrainTiles, structureTiles} = options;
+  let errors = _errors;
   structureTiles.forEach(st => {
     let missingTiles = st.position.surfacePoints(st.texture.size).filter(v =>
       !terrainTiles.find(tt => tt.position.equals(v))
     );
-    if (missingTiles.length) errors.push(`${st.data.name} has no terrain tile at positions: ${missingTiles.join(', ')}`);
+    if (missingTiles.length) {
+      errors.push(`${st.data.name} has no terrain tile at positions: ${missingTiles.join(', ')}`);
+    }
   });
+  return [errors, options];
 }
 
-function validateStructuresOverlap (errors, {structureTiles}) {
+function validateStructuresOverlap ([_errors, options]) {
+  let {structureTiles} = options;
+  let errors = _errors;
   let overlap = [];
   checkOverlap(structureTiles[0], structureTiles.slice(1));
 
@@ -53,14 +70,22 @@ function validateStructuresOverlap (errors, {structureTiles}) {
       }));
     checkOverlap(array[0], array.slice(1));
   }
-  if (overlap.length) overlap.forEach(err => errors.push(`${err[0]} and ${err[1]} overlap on position ${err[2]}`));
+  if (overlap.length) {
+    overlap.forEach(err => errors.push(`${err[0]} and ${err[1]} overlap on position ${err[2]}`));
+  }
+  return [errors, options];
 }
 
-function validateSystemComponents (errors, {system, structureTiles}) {
+function validateSystemComponents ([_errors, options]) {
+  let errors = _errors;
+  let {system, structureTiles} = options;
   let missingTiles = system.components.filter(c => {
     return structureTiles.map(t => t.data.name).indexOf(c.name) === -1;
   });
-  if (missingTiles.length) missingTiles.forEach(c => errors.push(`${c.name} component does not have a tile`));
+  if (missingTiles.length) {
+    missingTiles.forEach(c => errors.push(`${c.name} component does not have a tile`));
+  }
+  return [errors, options];
 }
 
 // flatmapToTilesArray :: Array -> Array
