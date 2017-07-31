@@ -37,7 +37,7 @@ class Graphic extends React.Component {
           <Graphics ref={c => this.graphics = c}/>
           {this.props.structureTiles.map(c =>
             <Sprite key={c.data.name}
-              width={this.state.grid.tile.width}
+              width={this.state.grid.tile.width * c.texture.width}
               height={this.state.grid.tile.height * c.texture.height}
               x={this.state.grid.tileCoords(c.position).x}
               y={this.state.grid.tileCoords(c.position.plus(c.texture.offsetHeight)).y}
