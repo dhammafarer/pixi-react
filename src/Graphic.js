@@ -24,8 +24,8 @@ class Graphic extends React.Component {
     this.setState({width, height, grid});
 
     let graphics = this.graphics;
-    //shapes.grid(grid)
-    // .forEach(t => drawShape(graphics, t));
+    shapes.grid(grid)
+     .forEach(t => drawShape(graphics, t));
   }
 
   render () {
