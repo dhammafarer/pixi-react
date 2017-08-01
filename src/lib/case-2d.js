@@ -18,8 +18,8 @@ export const case2d = (options) => {
 // flatmapToTilesArray :: Array -> Array
 export function flatmapToTilesArray (objectsMap) {
   return objectsMap
-    .map((col, x) => col
-      .map((texture, y) => {
+    .map((col, y) => col
+      .map((texture, x) => {
         return tile({texture, position: vector(x, y)});
       })
     )
