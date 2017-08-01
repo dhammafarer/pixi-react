@@ -59,19 +59,38 @@ describe('validateCase2d', () => {
   });
 
   describe('validateStructuresOverlap', () => {
-    it('structureTiles overlap each other', () => {
+    beforeEach(() => {
       options.structureTiles = [
-        {data: {name: 'biomass'}, texture: {size: vector(1,0)}, position: vector(0, 0)},
-        {data: {name: 'house'}, texture: {size: vector(0,0)}, position: vector(1, 0)}
+        {data: {name: 'biomass'}, texture: {size: [2,1,1]}, position: vector(0,0)},
+        {data: {name: 'house'}, texture: {size: [1,1,1]}, position: vector(1,0)}
       ];
+    });
+    it('detects that structureTiles overlap each other', () => {
+      let res = validateStructuresOverlap(options, []);
+      expect(res.length).toEqual(1);
+    });
+
+    it('detects where structures overlap each other', () => {
+      let res = validateStructuresOverlap(options, []);
+      expect(matchedTiles(res).length).toEqual(1);
+      expect(matchedTiles(res)[0]).toEqual(vector(1,0).toString());
     });
   });
 
   describe('validateSystemComponents', () => {
-    it('there is no structureTile for every system component', () => {
+    beforeEach(() => {
       options.structureTiles = [
-        {data: {name: 'factory'}, texture: {size: vector(1,0,0)}, position: vector(0, 0)}
+        {data: {name: 'factory'}, texture: {size: [1,1,1]}, position: vector(0, 0)}
       ];
+    });
+
+    it('detects if there is no structureTile any system component', () => {
+      let res = validateSystemComponents(options, []);
+      expect(res.length).toEqual(1);
+    });
+    it('detects system components have no tile', () => {
+      let res = validateSystemComponents(options, []);
+      expect(res[0]).toMatch(/biomass/);
     });
   });
 });

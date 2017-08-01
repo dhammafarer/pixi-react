@@ -66,9 +66,9 @@ export function validateStructuresOverlap (options, _errors) {
     if (!arr.length) return;
     let tile = head(arr);
     let array = tail(arr);
-    tile.position.surfacePoints(tile.texture.size)
+    tileSurfacePoints(tile)
       .forEach(p => array.forEach(t2 => {
-        t2.position.surfacePoints(t2.texture.size).forEach(p2 => {
+        tileSurfacePoints(t2).forEach(p2 => {
           if (p2.equals(p)) overlap.push([tile.data.name, t2.data.name, p]);
         });
       }));
