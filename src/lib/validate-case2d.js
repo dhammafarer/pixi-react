@@ -28,7 +28,7 @@ function handleErrors (options, errors) {
 function validateTerrainSize (options, _errors) {
   let {terrainTiles, gridSize} = options;
   let errors = _errors;
-  if (terrainTiles.some(tile => tile.position.greaterThan(gridSize))) {
+  if (terrainTiles.some(tile => !gridSize.greaterThan(tile.position))) {
     errors.push('terrain map is larger than grid');
   }
   return errors;
