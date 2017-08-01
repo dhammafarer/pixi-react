@@ -1,3 +1,4 @@
+import vector from './vector.js';
 import compose from 'ramda/src/compose';
 import head from 'ramda/src/head';
 import tail from 'ramda/src/tail';
@@ -39,7 +40,7 @@ export function validateStructuresPlacement (options, _errors) {
   let {terrainTiles, structureTiles} = options;
   let errors = _errors;
   structureTiles.forEach(st => {
-    let missingTiles = st.position.surfacePoints(st.texture.size).filter(v =>
+    let missingTiles = tileSurfacePoints(st).filter(v =>
       !terrainTiles.find(tt => tt.position.equals(v))
     );
     if (missingTiles.length) {
@@ -86,4 +87,15 @@ export function validateSystemComponents (options, _errors) {
     missingTiles.forEach(c => errors.push(`${c.name} component does not have a tile`));
   }
   return errors;
+}
+
+function tileSurfacePoints (tile) {
+  let points = [];
+  let [x,y] = tile.texture.size;
+  for (let i=0; i<x; i++) {
+    for (let j=0; j<y; j++) {
+      points.push(tile.position.plus(vector(i,j)));
+    }
+  }
+  return points;
 }

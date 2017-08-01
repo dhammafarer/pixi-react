@@ -40,7 +40,6 @@ describe('validateCase2d', () => {
 
   describe('validateStructuresPlacement', () => {
     beforeEach(() => {
-      options.terrainTiles = flatmapToTilesArray([[{}, null]]);
       options.structureTiles = [
         {data: {name: 'biomass'}, texture: {size: [2,2,1]}, position: vector(1, 1)}
       ];
@@ -53,20 +52,17 @@ describe('validateCase2d', () => {
 
     it('detects correct missing tiles ', () => {
       let res = validateStructuresPlacement(options, []);
-      let matchedTiles = res[0].match(/\([^)]+\)/g);
       let missingTiles = [vector(1,2), vector(2,1), vector(2,2)];
-      /* eslint-disable no-console */
-      console.log(vector(1,1).surfacePoints(vector(2,2,1)).toString());
 
-      expect(matchedTiles.length).toEqual(missingTiles.length);
+      expect(matchedTiles(res).length).toEqual(missingTiles.length);
     });
   });
 
   describe('validateStructuresOverlap', () => {
     it('structureTiles overlap each other', () => {
       options.structureTiles = [
-        {data: {name: 'biomass'}, texture: {size: vector(1,0,0)}, position: vector(0, 0)},
-        {data: {name: 'house'}, texture: {size: vector(0,0,0)}, position: vector(1, 0)}
+        {data: {name: 'biomass'}, texture: {size: vector(1,0)}, position: vector(0, 0)},
+        {data: {name: 'house'}, texture: {size: vector(0,0)}, position: vector(1, 0)}
       ];
     });
   });
@@ -79,3 +75,7 @@ describe('validateCase2d', () => {
     });
   });
 });
+
+function matchedTiles (res) {
+  return res[0].match(/\([^)]+\)/g);
+}
