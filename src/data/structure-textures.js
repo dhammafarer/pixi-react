@@ -9,7 +9,7 @@ export const factory = texture({
 
 export const factory2 = texture({
   filename: 'factory2.png',
-  size: [2,2,1],
+  size: [2,1,1],
   height: 2.5,
   width: 1.5,
   offsetHeight: vector(-1, -1)

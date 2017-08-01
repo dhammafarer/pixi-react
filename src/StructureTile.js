@@ -9,14 +9,14 @@ StructureTile.propTypes = {
 };
 
 function StructureTile ({grid, tile}) {
-  let data = isometricTile(grid, tile);
+  let it = isometricTile(grid, tile);
   return (
     <Sprite
       image={require('./assets/' + tile.texture.filename)}
-      x={data.x()}
-      y={data.y()}
-      width={data.width()}
-      height={data.height()}
+      x={it.x()}
+      y={it.y()}
+      width={it.width()}
+      height={it.height()}
     />
   );
 }
