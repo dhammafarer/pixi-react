@@ -17,7 +17,7 @@ export default function  validateCase (options) {
 }
 
 // handleErrors :: (Object, Array) -> Array
-function handleErrors (options, errors) {
+export function handleErrors (options, errors) {
   if (errors.length) {
     throw new Error(`Validation Error: ${options.name} contains errors:\n ${errors.join('\n')}`);
   }
@@ -25,7 +25,7 @@ function handleErrors (options, errors) {
 }
 
 // validateTerrainMapSize :: (Object, Array) -> Array
-function validateTerrainSize (options, _errors) {
+export function validateTerrainSize (options, _errors) {
   let {terrainTiles, gridSize} = options;
   let errors = _errors;
   if (terrainTiles.some(tile => !gridSize.greaterThan(tile.position))) {
@@ -35,7 +35,7 @@ function validateTerrainSize (options, _errors) {
 }
 
 // validateStructuresPlacement :: (Object, Array) -> Array
-function validateStructuresPlacement (options, _errors) {
+export function validateStructuresPlacement (options, _errors) {
   let {terrainTiles, structureTiles} = options;
   let errors = _errors;
   structureTiles.forEach(st => {
@@ -50,7 +50,7 @@ function validateStructuresPlacement (options, _errors) {
 }
 
 // validateStructuresOverlap :: (Object, Array) -> Array
-function validateStructuresOverlap (options, _errors) {
+export function validateStructuresOverlap (options, _errors) {
   let {structureTiles} = options;
   let errors = _errors;
   let overlap = [];
@@ -76,7 +76,7 @@ function validateStructuresOverlap (options, _errors) {
 }
 
 // calidateSystemComponents :: (Object, Array) -> Array
-function validateSystemComponents (options, _errors) {
+export function validateSystemComponents (options, _errors) {
   let errors = _errors;
   let {system, structureTiles} = options;
   let missingTiles = system.components.filter(c => {

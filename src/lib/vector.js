@@ -1,13 +1,12 @@
-module.exports = function vector (x, y, z = 0) {
+module.exports = function vector (x, y) {
   const proto = {
     x,
     y,
-    z,
-    toString: () => `(${x},${y},${z})`,
-    plus: (v2) => vector(x + v2.x, y + v2.y, z + v2.z),
-    minus: (v2) => vector(x - v2.x, y - v2.y, z - v2.z),
+    toString: () => `(${x},${y})`,
+    plus: (v2) => vector(x + v2.x, y + v2.y),
+    minus: (v2) => vector(x - v2.x, y - v2.y),
     greaterThan: v2 => (x > v2.x && y > v2.y),
-    equals: v2 => (x === v2.x && y === v2.y && z === v2.z),
+    equals: v2 => (x === v2.x && y === v2.y),
     surfacePoints: v2 => {
       let res = [];
       for (let i=0; i<=(v2.x); i++) {
