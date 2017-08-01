@@ -24,8 +24,8 @@ class Graphic extends React.Component {
     this.setState({width, height, grid});
 
     let graphics = this.graphics;
-    shapes.grid(grid)
-      .forEach(t => drawShape(graphics, t));
+    //shapes.grid(grid)
+    // .forEach(t => drawShape(graphics, t));
   }
 
   render () {
@@ -45,7 +45,7 @@ class Graphic extends React.Component {
 }
 
 Graphic.propTypes = {
-  gridSize: PropTypes.object.isRequired,
+  gridSize: PropTypes.array.isRequired,
   system: PropTypes.object.isRequired,
   terrainTiles: PropTypes.array.isRequired,
   structureTiles: PropTypes.array.isRequired,

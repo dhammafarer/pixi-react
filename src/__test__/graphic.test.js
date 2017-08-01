@@ -8,7 +8,7 @@ describe('graphic', () => {
       let width = 800;
       let height = 400;
       let ratio = 1.732;
-      let gridSize = vector(2,2);
+      let gridSize = [3,3];
       let expected = {
         width,
         height,

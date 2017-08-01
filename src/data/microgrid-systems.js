@@ -5,7 +5,7 @@ import structureTile from '../lib/structure-tile.js';
 const grass = {};
 
 export const fushan = case2d({
-  grid: vector(3,3),
+  grid: [3, 3],
   terrainMap: [
     [grass, grass, grass],
     [grass, grass, grass],

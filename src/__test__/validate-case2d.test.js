@@ -10,26 +10,23 @@ import {
 
 describe('validateCase2d', () => {
   let options = {};
-  let errors = [];
 
   beforeEach(() => {
-    errors = [];
     let name = 'grid project';
-    let gridSize = vector(2, 2, 1);
+    let gridSize = [2,2];
     let terrainTiles = flatmapToTilesArray([
       [{}, {}],
       [{}, {}]
     ]);
     let system = {components: [{name: 'biomass'}]};
     let structureTiles = [
-      {data: {name: 'biomass'}, texture: {size: vector(1,1,1)}, position: vector(0,0,0)}
+      {data: {name: 'biomass'}, texture: {size: [1,1,1]}, position: vector(0,0)}
     ];
     options = {name, gridSize, terrainTiles, system, structureTiles};
   });
 
   describe('validateTerrainSize', () => {
     it('returns errors when terrain does not fit gridSize', () => {
-      options.gridSize = vector(2, 2);
       options.terrainTiles = flatmapToTilesArray([
         [{}, {}, {}],
         [{}, {}, {}],
@@ -43,10 +40,9 @@ describe('validateCase2d', () => {
 
   describe('validateStructuresPlacement', () => {
     beforeEach(() => {
-      options.gridSize = vector(2, 2, 1);
       options.terrainTiles = flatmapToTilesArray([[{}, null]]);
       options.structureTiles = [
-        {data: {name: 'biomass'}, texture: {size: vector(2,2,1)}, position: vector(1, 1)}
+        {data: {name: 'biomass'}, texture: {size: [2,2,1]}, position: vector(1, 1)}
       ];
     });
 

@@ -9,7 +9,7 @@ export const factory = texture({
 
 export const factory2 = texture({
   filename: 'factory2.png',
-  size: vector(2, 1, 1),
+  size: [2,2,1],
   height: 2.5,
   width: 1.5,
   offsetHeight: vector(-1, -1)
@@ -17,14 +17,14 @@ export const factory2 = texture({
 
 export const house = texture({
   filename: 'house.png',
-  size: vector(1, 1, 1),
+  size: [1,1,1],
   height: 2,
   offsetHeight: vector(-1, -1)
 });
 
 export const solar = texture({
   filename: 'solar.png',
-  size: vector(2, 2, 1),
+  size: [2,2,1],
   height: 2,
   offsetHeight: vector(-1, -1)
 });

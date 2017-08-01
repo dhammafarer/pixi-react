@@ -9,7 +9,8 @@ export function gridTile (grid, origin) {
 }
 
 export function grid (grid, origin = vector(0,0)) {
-  return origin
-    .surfacePoints(grid.gridSize)
+  /* eslint-disable no-console */
+  console.log(grid);
+  return grid.gridPoints
     .map(p => gridTile(grid, p));
 }
