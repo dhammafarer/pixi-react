@@ -48,19 +48,19 @@ describe('case2d', () => {
 
     it('structureTiles overlap each other', () => {
       options.structureTiles = [
-        {data: {name: 'biomass'}, texture: {size: vector(1,0)}, position: vector(0, 0)},
-        {data: {name: 'house'}, texture: {size: vector(0,0)}, position: vector(1, 0)}
+        {data: {name: 'biomass'}, texture: {size: vector(1,0,0)}, position: vector(0, 0)},
+        {data: {name: 'house'}, texture: {size: vector(0,0,0)}, position: vector(1, 0)}
       ];
 
       expect(() => case2d(options)).toThrow(/biomass/);
       expect(() => case2d(options)).toThrow(/house/);
-      expect(() => case2d(options)).toThrow(/(1,0)/);
-      expect(() => case2d(options)).not.toThrow(/(0,0)/);
+      expect(() => case2d(options)).toThrow(/(1,0,0)/);
+      expect(() => case2d(options)).not.toThrow(/(0,0,0)/);
     });
 
     it('there is no structureTile for every system component', () => {
       options.structureTiles = [
-        {data: {name: 'factory'}, texture: {size: vector(1,0)}, position: vector(0, 0)}
+        {data: {name: 'factory'}, texture: {size: vector(1,0,0)}, position: vector(0, 0)}
       ];
 
       expect(() => case2d(options)).toThrow(/biomass/);

@@ -3,9 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as shapes from './lib/shapes.js';
 import isometricGrid from './lib/isometric-grid.js';
-import { Stage, Graphics, Sprite } from 'react-pixi';
+import { Stage, Graphics } from 'react-pixi';
 import { drawShape } from './helpers/pixi-helpers.js';
 import TerrainTiles from './TerrainTiles.js';
+import StructureTile from './StructureTile.js';
 
 class Graphic extends React.Component {
   constructor (props) {
@@ -28,21 +29,15 @@ class Graphic extends React.Component {
   }
 
   render () {
-    let {width, height} = this.state;
+    let {width, height, grid} = this.state;
 
     return (
       <div className="graphic" ref={c => this.graphic = c}>
         <Stage width={width} height={height} transparent={true}>
           <TerrainTiles grid={this.state.grid} terrainTiles={this.props.terrainTiles}/>
           <Graphics ref={c => this.graphics = c}/>
-          {this.props.structureTiles.map(c =>
-            <Sprite key={c.data.name}
-              width={this.state.grid.tile.width * c.texture.width}
-              height={this.state.grid.tile.height * c.texture.height}
-              x={this.state.grid.tileCoords(c.position).x}
-              y={this.state.grid.tileCoords(c.position.plus(c.texture.offsetHeight)).y}
-              image={require('./assets/' + c.texture.filename)}/>
-          )}
+          {this.props.structureTiles.map(tile =>
+           <StructureTile key={tile.data.name} tile={tile} grid={grid}/>)}
         </Stage>
       </div>
     );

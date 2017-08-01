@@ -1,5 +1,5 @@
 import vector from './vector.js';
-const DEFAULT_SIZE = vector(0, 0);
+const DEFAULT_SIZE = vector(1, 1, 1);
 
 export default function texture ({
   filename,

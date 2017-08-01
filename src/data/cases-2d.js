@@ -7,7 +7,7 @@ import { factory, factory2, house } from './structure-textures.js';
 
 export const fushan = case2d({
   name: 'Fushan Microgrid',
-  gridSize: vector(2, 2),
+  gridSize: vector(3, 3),
   terrainTiles: flatmapToTilesArray([
     [grass, grass, grass],
     [grass, grass, grass],
